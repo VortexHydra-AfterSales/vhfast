@@ -10,7 +10,7 @@
   header { background: linear-gradient(135deg, #1a2e4a 0%, #2c4a6e 100%); color: white; padding: 40px; text-align: center; }
   header .logo { font-size: 42px; font-weight: 800; letter-spacing: 2px; border: 3px solid #4a9fd4; display: inline-block; padding: 10px 24px; border-radius: 6px; margin-bottom: 16px; }
   header h1 { font-size: 20px; font-weight: 400; color: #a8c8e8; letter-spacing: 1px; }
-  main { flex: 1; max-width: 1000px; margin: 60px auto; padding: 0 24px; width: 100%; }
+  main { flex: 1; max-width: 1000px; margin: 50px auto; padding: 0 24px; width: 100%; }
   .card-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 24px; }
   .card { background: white; border-radius: 12px; padding: 32px 28px; box-shadow: 0 4px 16px rgba(0,0,0,0.08); text-decoration: none; color: inherit; border-top: 5px solid #4a9fd4; transition: transform .2s, box-shadow .2s; display: flex; flex-direction: column; gap: 12px; }
   .card:hover { transform: translateY(-4px); box-shadow: 0 8px 28px rgba(0,0,0,0.13); }
@@ -22,7 +22,19 @@
   .card .meta { font-size: 13px; font-weight: 600; color: #4a9fd4; margin-top: auto; padding-top: 12px; border-top: 1px solid #f0f3f7; }
   .card.blanes .meta { color: #27ae60; }
   .card.spare .meta { color: #e67e22; }
-  footer { text-align: center; padding: 28px; color: #8a9ab0; font-size: 12px; border-top: 1px solid #e2e8f0; }
+
+  /* CONTACT SECTION */
+  .contact-section { margin-top: 48px; background: white; border-radius: 12px; padding: 32px 36px; box-shadow: 0 4px 16px rgba(0,0,0,0.07); }
+  .contact-section h2 { font-size: 16px; font-weight: 700; color: #1a2e4a; margin-bottom: 20px; text-align: center; letter-spacing: 0.5px; }
+  .contact-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+  .contact-btn { display: inline-flex; align-items: center; gap: 10px; padding: 14px 28px; border-radius: 30px; font-size: 15px; font-weight: 600; text-decoration: none; transition: transform .2s, box-shadow .2s; }
+  .contact-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.15); }
+  .btn-email { background: #1a2e4a; color: white; }
+  .btn-whatsapp { background: #25d366; color: white; }
+  .btn-phone { background: #4a9fd4; color: white; }
+  .contact-btn .icon { font-size: 20px; }
+
+  footer { text-align: center; padding: 28px; color: #8a9ab0; font-size: 12px; border-top: 1px solid #e2e8f0; margin-top: 40px; }
   @media (max-width: 700px) { .card-grid { grid-template-columns: 1fr; } }
 </style>
 </head>
@@ -52,7 +64,26 @@
       <div class="meta">67 documents &rarr;</div>
     </a>
   </div>
+
+  <div class="contact-section">
+    <h2>&#128222; Contact Vortex Hydra After Sales Service</h2>
+    <div class="contact-buttons">
+      <a class="contact-btn btn-email" href="mailto:roberto_berti@vortexhydra.com">
+        <span class="icon">&#9993;</span> roberto_berti@vortexhydra.com
+      </a>
+      <a class="contact-btn btn-whatsapp" href="https://wa.me/393487407352">
+        <span class="icon">&#128241;</span> WhatsApp
+      </a>
+      <a class="contact-btn btn-phone" href="tel:+393487407352">
+        <span class="icon">&#128222;</span> +39 348 740 7352
+      </a>
+    </div>
+  </div>
 </main>
-<footer>VH FAST &mdash; Vortex Hydra Field After Sales &amp; Technical Support &nbsp;|&nbsp; &copy; 2025</footer>
+<footer>VH FAST &mdash; Vortex Hydra Field After Sales &amp; Technical Support &nbsp;|&nbsp; &copy; 2025 &nbsp;&nbsp; ⚽ FORZA SPAL &nbsp;|&nbsp; Non camminerai mai sola</footer>
 </body>
 </html>
+
+
+
+
