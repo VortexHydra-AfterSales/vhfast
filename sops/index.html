@@ -1,0 +1,407 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VH FAST – SOPs | FP McCann Cadeby</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', Arial, sans-serif; background: #f4f6f9; color: #2c3e50; }
+
+  header {
+    background: linear-gradient(135deg, #1a2e4a 0%, #2c4a6e 100%);
+    color: white; padding: 28px 40px;
+    display: flex; align-items: center; gap: 24px;
+  }
+  header .logo { font-size: 28px; font-weight: 800; letter-spacing: 1px; border: 3px solid #4a9fd4; padding: 6px 14px; border-radius: 4px; }
+  header .tagline { font-size: 13px; color: #a8c8e8; margin-top: 4px; }
+  header h1 { font-size: 22px; font-weight: 600; }
+  header .meta { font-size: 13px; color: #a8c8e8; margin-top: 5px; }
+
+  .toolbar {
+    background: white; padding: 16px 40px;
+    display: flex; gap: 12px; align-items: center; flex-wrap: wrap;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08); position: sticky; top: 0; z-index: 100;
+  }
+  .search-wrap { position: relative; flex: 1; min-width: 220px; max-width: 360px; }
+  .search-wrap input {
+    width: 100%; padding: 9px 16px 9px 40px; border: 1.5px solid #d0d8e4;
+    border-radius: 22px; font-size: 14px; outline: none; transition: border-color .2s;
+  }
+  .search-wrap input:focus { border-color: #4a9fd4; }
+  .search-wrap .icon { position: absolute; left: 13px; top: 50%; transform: translateY(-50%); color: #8a9ab0; font-size: 15px; }
+
+  .filter-group { display: flex; gap: 6px; align-items: center; }
+  .filter-label { font-size: 12px; font-weight: 600; color: #8a9ab0; text-transform: uppercase; letter-spacing: .5px; margin-right: 2px; }
+  .filter-btn {
+    padding: 6px 13px; border: 1.5px solid #d0d8e4; border-radius: 20px;
+    background: white; cursor: pointer; font-size: 13px; color: #4a5568;
+    transition: all .2s; white-space: nowrap;
+  }
+  .filter-btn:hover { border-color: #4a9fd4; color: #4a9fd4; }
+  .filter-btn.active { background: #4a9fd4; border-color: #4a9fd4; color: white; font-weight: 600; }
+  .filter-btn.l1.active  { background: #2980b9; border-color: #2980b9; }
+  .filter-btn.l3.active  { background: #8e44ad; border-color: #8e44ad; }
+  .divider { width: 1px; height: 28px; background: #e2e8f0; margin: 0 4px; }
+  .doc-count { margin-left: auto; font-size: 13px; color: #8a9ab0; white-space: nowrap; }
+
+  main { max-width: 1100px; margin: 0 auto; padding: 28px 24px; }
+
+  .section-group { margin-bottom: 28px; }
+  .section-title {
+    display: flex; align-items: center; gap: 10px;
+    font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: .8px;
+    color: white; background: #2c4a6e; padding: 10px 18px;
+    border-radius: 8px 8px 0 0;
+  }
+  .section-title .dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+  .section-title .type-code { margin-left: auto; font-size: 11px; font-weight: 400; opacity: .7; background: rgba(255,255,255,.15); padding: 2px 8px; border-radius: 8px; }
+  .section-body { background: white; border-radius: 0 0 8px 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,.07); }
+
+  .doc-row {
+    display: flex; align-items: center; gap: 14px;
+    padding: 12px 18px; border-bottom: 1px solid #f0f3f7; transition: background .15s;
+  }
+  .doc-row:last-child { border-bottom: none; }
+  .doc-row:hover { background: #f7fafd; }
+  .doc-row.hidden { display: none; }
+
+  .serial {
+    min-width: 80px; font-size: 12px; font-weight: 700; color: #4a5568;
+    background: #edf2f7; padding: 4px 8px; border-radius: 6px; text-align: center; flex-shrink: 0;
+  }
+  .doc-title { flex: 1; font-size: 14px; color: #2c3e50; line-height: 1.4; }
+  .doc-sub { font-size: 12px; color: #8a9ab0; margin-top: 2px; }
+
+  .line-badge {
+    padding: 3px 10px; border-radius: 12px; font-size: 12px; font-weight: 700; flex-shrink: 0;
+  }
+  .badge-l1 { background: #dbeafe; color: #1d4ed8; }
+  .badge-l3 { background: #ede9fe; color: #6d28d9; }
+  .badge-gen { background: #f0fdf4; color: #166534; }
+
+  .doc-link {
+    display: inline-flex; align-items: center; gap: 5px;
+    padding: 6px 14px; border-radius: 16px; font-size: 13px; font-weight: 600;
+    background: #4a9fd4; color: white; text-decoration: none; transition: background .2s; flex-shrink: 0;
+  }
+  .doc-link:hover { background: #2c7fb8; }
+
+  .dot-tm  { background: #e67e22; }
+  .dot-ht  { background: #27ae60; }
+  .dot-pk  { background: #8e44ad; }
+  .dot-co  { background: #e74c3c; }
+  .dot-gen { background: #7f8c8d; }
+
+  .no-results { text-align: center; padding: 60px 20px; color: #8a9ab0; font-size: 15px; }
+
+  footer { text-align: center; padding: 28px; color: #8a9ab0; font-size: 12px; border-top: 1px solid #e2e8f0; margin-top: 20px; }
+</style>
+<script src="search_index.js"></script>
+</head>
+<body>
+
+<header>
+  <div>
+    <div class="logo">VH FAST</div>
+    <div class="tagline">Vortex Hydra — Field After Sales & Technical Support</div>
+  </div>
+  <div>
+    <h1>Standard Operating Procedures — FP McCann (Cadeby)</h1>
+    <div class="meta">Order C22004 &nbsp;·&nbsp; Year 2023 &nbsp;·&nbsp; Line 1 (TLE Profile) &nbsp;&amp;&nbsp; Line 3 (Sea Wave 5 Profile)</div>
+  </div>
+</header>
+
+<div class="toolbar">
+  <div class="search-wrap">
+    <span class="icon">&#128269;</span>
+    <input type="text" id="searchInput" placeholder="Search SOPs…" oninput="render()">
+  </div>
+
+  <div class="divider"></div>
+  <div class="filter-group">
+    <span class="filter-label">Line</span>
+    <button class="filter-btn active" data-line="ALL"  onclick="setLine(this)">All</button>
+    <button class="filter-btn l1"    data-line="L1"   onclick="setLine(this)">Line 1</button>
+    <button class="filter-btn l3"    data-line="L3"   onclick="setLine(this)">Line 3</button>
+  </div>
+
+  <div class="divider"></div>
+  <div class="filter-group">
+    <span class="filter-label">Type</span>
+    <button class="filter-btn active" data-cat="ALL" onclick="setCat(this)">All</button>
+    <button class="filter-btn" data-cat="TM" onclick="setCat(this)">Tile Making</button>
+    <button class="filter-btn" data-cat="HT" onclick="setCat(this)">Handling &amp; Curing</button>
+    <button class="filter-btn" data-cat="PK" onclick="setCat(this)">Packing</button>
+    <button class="filter-btn" data-cat="CO" onclick="setCat(this)">Coating</button>
+    <button class="filter-btn" data-cat="GEN" onclick="setCat(this)">General</button>
+  </div>
+
+  <div class="doc-count" id="docCount"></div>
+</div>
+
+<main id="main"></main>
+
+<footer>
+  VH FAST — Vortex Hydra Field After Sales & Technical Support &nbsp;|&nbsp; © 2025
+</footer>
+
+<script>
+const DIR = "docs/";
+
+const MACHINES = [
+  // ── TILE MAKING ─────────────────────────────────────────────────────────────
+  {
+    cat: "TM", typeCode: "TM-101", dot: "dot-tm",
+    title: "Extrusion Head + Bench Section",
+    subs: "slipper roller bearing motor drive belt tension internal side guides hopper bench stirrer assembly pushing system lubrication gear box shaft chain trolley tooth polycord grease guide anti-lift cutting unit blade toothed pulley encoder lubricator UCF removable fixed",
+    sops: [
+      { serial: "A.00146", line: "L1", subtitle: "TLE Profile", file: DIR + "SOP A.00146 EXTRUSION HEAD + BENCH SECTION -TLE PROFILE.pdf" },
+      { serial: "M.02206", line: "L1", subtitle: "Manufacturing Equipment — TLE Profile", file: DIR + "SOP M02206 Manufacturing Equipment of Roof Tiles-TLE Profile.pdf" },
+      { serial: "M.02207", line: "L3", subtitle: "Manufacturing Equipment — Sea Wave 5 Profile", file: DIR + "SOP M.02207 Manufacturing Equipment of Roof Tiles Sea Wave 5 Profile.pdf" },
+    ]
+  },
+  {
+    cat: "TM", typeCode: "TM-103", dot: "dot-tm",
+    title: "Transport Line of Tiles and Moulds",
+    subs: "polycord belt guide pulley pallet scrapping blowing overlapping safety acrylic paint mould transport",
+    sops: [
+      { serial: "M.02208", line: "L1", subtitle: "Line 1", file: DIR + "SOP M02208 TRANSPORT LINE OF TILES AND MOULDS.pdf" },
+      { serial: "M.02209", line: "L3", subtitle: "Line 3", file: DIR + "SOP M02209 TRANSPORT LINE OF TILES AND MOULDS.pdf" },
+    ]
+  },
+  {
+    cat: "TM", typeCode: "TM-104", dot: "dot-tm",
+    title: "Flow Inverter",
+    subs: "flow inverter direction",
+    sops: [
+      { serial: "M.02210", line: "L1", subtitle: "Line 1", file: DIR + "SOP M02210 FLOW INVERTER.pdf" },
+      { serial: "M.02211", line: "L3", subtitle: "Line 3", file: DIR + "SOP M02211 FLOW INVERTER.pdf" },
+    ]
+  },
+  {
+    cat: "TM", typeCode: "TM-107", dot: "dot-tm",
+    title: "Automatic Depalleter",
+    subs: "depalleter phase positioning alignment pallet",
+    sops: [
+      { serial: "M.02212", line: "L1", subtitle: "Line 1", file: DIR + "SOP M02212 AUTOMATIC DEPALLETER.pdf" },
+      { serial: "M.02213", line: "L3", subtitle: "Line 3", file: DIR + "SOP M02213 AUTOMATIC DEPALLETER.pdf" },
+    ]
+  },
+  {
+    cat: "TM", typeCode: "TM-106", dot: "dot-tm",
+    title: "Automatic Brush Oiler",
+    subs: "brush oil lubrication mould oiler",
+    sops: [
+      { serial: "M.02214", line: "L1", subtitle: "Line 1", file: DIR + "SOP M02214 AUTOMATIC BRUSH OILER.pdf" },
+      { serial: "M.02215", line: "L3", subtitle: "Line 3", file: DIR + "SOP M02215 AUTOMATIC BRUSH OILER.pdf" },
+    ]
+  },
+
+  // ── COATING ─────────────────────────────────────────────────────────────────
+  {
+    cat: "CO", typeCode: "CO-101", dot: "dot-co",
+    title: "Acrylic Paint Applicator (water-based, dry tiles)",
+    subs: "acrylic paint applicator conveyor polycord belt guide pulley water dry tiles coating colour",
+    sops: [
+      { serial: "M.02216", line: "L1", subtitle: "Line 1", file: DIR + "SOP M02216 Acrylic Paint Applicator for water based paint on Dry Tiles.pdf" },
+      { serial: "M.02217", line: "L3", subtitle: "Line 3", file: DIR + "SOP M02217 Acrylic Paint Applicator for water based paint on Dry Tiles.pdf" },
+    ]
+  },
+
+  // ── HANDLING & CURING ───────────────────────────────────────────────────────
+  {
+    cat: "HT", typeCode: "HT-102", dot: "dot-ht",
+    title: "Automatic Racker – Deracker",
+    subs: "loading unloading conveyor elevator floors motorization height braking guide pusher racker deracker hydraulic tiles",
+    sops: [
+      { serial: "M.02222", line: "L1", subtitle: "Line 1", file: DIR + "SOP M02222 Automatic Racker -Deracker.pdf" },
+      { serial: "M.02223", line: "L3", subtitle: "Line 3", file: DIR + "SOP M02223 Automatic Racker -Deracker.pdf" },
+    ]
+  },
+  {
+    cat: "HT", typeCode: "HT-103", dot: "dot-ht",
+    title: "Rotary-Rack 45",
+    subs: "rotary rack step indexer curing drying",
+    sops: [
+      { serial: "M.02224", line: "L1", subtitle: "Line 1", file: DIR + "SOP M02224 ROTARY-RACK 45.pdf" },
+      { serial: "M.02225", line: "L3", subtitle: "Line 3", file: DIR + "SOP M02225 ROTARY-RACK 45.pdf" },
+    ]
+  },
+  {
+    cat: "HT", typeCode: "HT-108", dot: "dot-ht",
+    title: "Heating System for Curing",
+    subs: "heating curing temperature burner gas heat",
+    sops: [
+      { serial: "M.02228", line: "L1", subtitle: "Line 1", file: DIR + "SOP M02228 HEATING SYSTEM FOR CURING.pdf" },
+      { serial: "M.02229", line: "L3", subtitle: "Line 3", file: DIR + "SOP M02229 HEATING SYSTEM FOR CURING.pdf" },
+    ]
+  },
+
+  // ── PACKING ─────────────────────────────────────────────────────────────────
+  {
+    cat: "PK", typeCode: "PK-102", dot: "dot-pk",
+    title: "Racker & Deracker with Big Pack Formation",
+    subs: "loading unloading conveyor elevator floors motorization height fixed guides drying rotary pusher racker deracker hydraulic roller mobile structure lifting lowering pack extraction formation big pack",
+    sops: [
+      { serial: "M.02234", line: "L1", subtitle: "Line 1", file: DIR + "SOP M02234 RACKER & DERACKER BIG PACK FORMATION.pdf" },
+      { serial: "M.02235", line: "L3", subtitle: "Line 3", file: DIR + "SOP M02235 RACKER & DERACKER BIG PACK FORMATION.pdf" },
+    ]
+  },
+  {
+    cat: "PK", typeCode: "PK-103", dot: "dot-pk",
+    title: "Drying Rotary-Rack",
+    subs: "drying rotary rack step indexer curing",
+    sops: [
+      { serial: "M.02236", line: "L1", subtitle: "Line 1", file: DIR + "SOP M02236 DRYING ROTARY-RACK.pdf" },
+      { serial: "M.02237", line: "L3", subtitle: "Line 3", file: DIR + "SOP M02237 DRYING ROTARY-RACK.pdf" },
+    ]
+  },
+  {
+    cat: "PK", typeCode: "PK-123", dot: "dot-pk",
+    title: "Tiles Turning System (not self-stacking profiles)",
+    subs: "rotating tower pusher hydraulic power unit turning 180 degrees self stacking",
+    sops: [
+      { serial: "M.02238", line: "L1+L3", subtitle: "Both lines", file: DIR + "SOP M02238 TILES TURNING SYSTEM FOR NOT SELF-STACKING.pdf" },
+    ]
+  },
+  {
+    cat: "PK", typeCode: "PK-120", dot: "dot-pk",
+    title: "Robot with Transfer Clamp — large packs over Strapping Line",
+    subs: "robot gripper clamp rubber plate guide bar pneumatic electrical transfer large packs strapping",
+    sops: [
+      { serial: "M.02239", line: "L1", subtitle: "Line 1", file: DIR + "SOP M02239 Robot with Transfer Clamp of large Packs over the Strapping Line.pdf" },
+      { serial: "M.02240", line: "L3", subtitle: "Line 3", file: DIR + "SOP M02240 Robot with Transfer Clamp of large Packs over the Strapping Line.pdf" },
+    ]
+  },
+  {
+    cat: "PK", typeCode: "PK-120", dot: "dot-pk",
+    title: "Robot with Transfer Clamp — strapped large packs on Palletizing Line",
+    subs: "robot gripper clamp rubber plate guide bar pneumatic electrical transfer strapped large packs palletizing",
+    sops: [
+      { serial: "M.02241", line: "L1", subtitle: "Line 1", file: DIR + "SOP M02241 Robot with Transfer Clamp of strapped large packs on the Palletizing Line.pdf" },
+      { serial: "M.02242", line: "L3", subtitle: "Line 3", file: DIR + "SOP M02242 Robot with Transfer Clamp of strapped large packs on the Palletizing Line.pdf" },
+    ]
+  },
+  {
+    cat: "PK", typeCode: "PK-111", dot: "dot-pk",
+    title: "Automatic Strapping Line (1 vertical + 1 horizontal Endra units)",
+    subs: "belt conveyor idler roller bed endra strapping vertical horizontal strap",
+    sops: [
+      { serial: "M.02243", line: "L1", subtitle: "Line 1", file: DIR + "SOP M02243 Automatic Strapping Line with 1 vertical y 1 horizontal Endra Strapping Units.pdf" },
+      { serial: "M.02244", line: "L3", subtitle: "Line 3", file: DIR + "SOP M02244 Automatic Strapping Line with 1 vertical y 1 horizontal Endra Strapping Units.pdf" },
+    ]
+  },
+  {
+    cat: "PK", typeCode: "PK-106", dot: "dot-pk",
+    title: "Automatic Palletizing Line",
+    subs: "transport chain pallet dispenser squeezer wood palletizing",
+    sops: [
+      { serial: "M.02245", line: "L1", subtitle: "Line 1", file: DIR + "SOP M02245 AUTOMATIC PALLETIZING LINE.pdf" },
+      { serial: "M.02246", line: "L3", subtitle: "Line 3", file: DIR + "SOP M02246 AUTOMATIC PALLETIZING LINE.pdf" },
+    ]
+  },
+
+  // ── GENERAL ─────────────────────────────────────────────────────────────────
+  {
+    cat: "GEN", typeCode: "GEN", dot: "dot-gen",
+    title: "Reference Documents",
+    subs: "structure list overview index",
+    sops: [
+      { serial: "—", line: "GEN", subtitle: "Common structure of SOPs", file: DIR + "%23 Common Structure of SOPs 120226.pdf" },
+      { serial: "—", line: "L1",  subtitle: "Full SOP list — Line 1 (Rotary-Rack 45)",   file: DIR + "%23 List of SOPs ROTARY Rack 45 McCann  L1.pdf" },
+      { serial: "—", line: "L3",  subtitle: "Full SOP list — Line 3 (Rotary-Rack 45)",   file: DIR + "%23 List of SOPs ROTARY Rack 45 McCann  L3.pdf" },
+    ]
+  },
+];
+
+// ── State ───────────────────────────────────────────────────────────────────
+let activeLine = "ALL";
+let activeCat  = "ALL";
+
+function setLine(btn) {
+  activeLine = btn.dataset.line;
+  document.querySelectorAll("[data-line]").forEach(b => b.classList.remove("active"));
+  btn.classList.add("active");
+  render();
+}
+function setCat(btn) {
+  activeCat = btn.dataset.cat;
+  document.querySelectorAll("[data-cat]").forEach(b => b.classList.remove("active"));
+  btn.classList.add("active");
+  render();
+}
+
+function lineBadge(line) {
+  if (line === "L1")    return '<span class="line-badge badge-l1">Line 1</span>';
+  if (line === "L3")    return '<span class="line-badge badge-l3">Line 3</span>';
+  if (line === "L1+L3") return '<span class="line-badge badge-l1">L1</span> <span class="line-badge badge-l3">L3</span>';
+  return '<span class="line-badge badge-gen">General</span>';
+}
+
+function sopMatchesLine(sop) {
+  if (activeLine === "ALL") return true;
+  return sop.line === activeLine || sop.line === "L1+L3" || sop.line === "GEN";
+}
+
+function render() {
+  const query = document.getElementById("searchInput").value.trim().toLowerCase();
+  const main  = document.getElementById("main");
+  main.innerHTML = "";
+  let total = 0;
+
+  MACHINES.forEach(machine => {
+    if (activeCat !== "ALL" && activeCat !== machine.cat) return;
+
+    const words = query.split(/\s+/).filter(Boolean);
+    const visibleSops = machine.sops.filter(s => {
+      if (!sopMatchesLine(s)) return false;
+      if (words.length) {
+        const filename = s.file.split("/").pop().replace(/%23/g, "#").replace(/%20/g, " ");
+        const fullText = (typeof SEARCH_INDEX !== "undefined" && SEARCH_INDEX[filename]) || "";
+        const searchable = [machine.title, machine.typeCode, machine.cat, machine.subs || "", s.serial, s.subtitle, s.line, fullText].join(" ").toLowerCase();
+        if (!words.every(w => searchable.includes(w))) return false;
+      }
+      return true;
+    });
+    if (visibleSops.length === 0) return;
+    total += visibleSops.length;
+
+    const group = document.createElement("div");
+    group.className = "section-group";
+
+    group.innerHTML = `
+      <div class="section-title">
+        <span class="dot ${machine.dot}"></span>
+        ${machine.title}
+        <span class="type-code">${machine.typeCode}</span>
+      </div>
+      <div class="section-body">
+        ${visibleSops.map(s => `
+          <div class="doc-row">
+            <div class="serial">${s.serial}</div>
+            <div class="doc-title">
+              ${machine.title}
+              <div class="doc-sub">${s.subtitle}</div>
+            </div>
+            ${lineBadge(s.line)}
+            <a class="doc-link" href="${s.file}" target="_blank">&#128196; Open PDF</a>
+          </div>
+        `).join("")}
+      </div>`;
+
+    main.appendChild(group);
+  });
+
+  if (total === 0) {
+    main.innerHTML = `<div class="no-results">No SOPs found${query ? ` for "<strong>${query}</strong>"` : ""}.</div>`;
+  }
+  document.getElementById("docCount").textContent = `${total} SOP${total !== 1 ? "s" : ""}`;
+}
+
+render();
+</script>
+</body>
+</html>
+
+

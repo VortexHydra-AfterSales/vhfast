@@ -1,0 +1,419 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VH FAST – Concrete Roof Tile Technical Library</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', Arial, sans-serif; background: #f4f6f9; color: #2c3e50; }
+
+  /* HEADER */
+  header {
+    background: linear-gradient(135deg, #1a2e4a 0%, #2c4a6e 100%);
+    color: white; padding: 28px 40px;
+    display: flex; align-items: center; gap: 24px;
+  }
+  header .logo {
+    font-size: 28px; font-weight: 800; letter-spacing: 1px;
+    border: 3px solid #4a9fd4; padding: 6px 14px; border-radius: 4px;
+  }
+  header .tagline { font-size: 13px; color: #a8c8e8; margin-top: 4px; }
+  header h1 { font-size: 22px; font-weight: 600; }
+
+  /* TOOLBAR */
+  .toolbar {
+    background: white; padding: 16px 40px;
+    display: flex; gap: 12px; align-items: center; flex-wrap: wrap;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08); position: sticky; top: 0; z-index: 100;
+  }
+  .search-wrap { position: relative; flex: 1; min-width: 220px; max-width: 380px; }
+  .search-wrap input {
+    width: 100%; padding: 9px 16px 9px 40px; border: 1.5px solid #d0d8e4;
+    border-radius: 22px; font-size: 14px; outline: none; transition: border-color .2s;
+  }
+  .search-wrap input:focus { border-color: #4a9fd4; }
+  .search-wrap .icon { position: absolute; left: 13px; top: 50%; transform: translateY(-50%); color: #8a9ab0; font-size: 15px; }
+  .filters { display: flex; gap: 8px; flex-wrap: wrap; }
+  .filter-btn {
+    padding: 7px 14px; border: 1.5px solid #d0d8e4; border-radius: 20px;
+    background: white; cursor: pointer; font-size: 13px; color: #4a5568;
+    transition: all .2s; white-space: nowrap;
+  }
+  .filter-btn:hover { border-color: #4a9fd4; color: #4a9fd4; }
+  .filter-btn.active { background: #4a9fd4; border-color: #4a9fd4; color: white; font-weight: 600; }
+  .doc-count { margin-left: auto; font-size: 13px; color: #8a9ab0; white-space: nowrap; }
+
+  /* MAIN */
+  main { max-width: 1100px; margin: 0 auto; padding: 28px 24px; }
+
+  /* SECTION GROUPS */
+  .section-group { margin-bottom: 32px; }
+  .section-title {
+    display: flex; align-items: center; gap: 10px;
+    font-size: 15px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.8px; color: white;
+    background: #2c4a6e; padding: 10px 18px; border-radius: 8px 8px 0 0;
+    margin-bottom: 0;
+  }
+  .section-title .dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+  .section-body { background: white; border-radius: 0 0 8px 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.07); }
+
+  /* DOCUMENT ROW */
+  .doc-row {
+    display: flex; align-items: center; gap: 14px;
+    padding: 13px 18px; border-bottom: 1px solid #f0f3f7;
+    transition: background .15s;
+  }
+  .doc-row:last-child { border-bottom: none; }
+  .doc-row:hover { background: #f7fafd; }
+  .doc-num {
+    min-width: 34px; height: 34px; border-radius: 50%;
+    background: #edf2f7; color: #4a5568; font-size: 12px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .doc-title { flex: 1; font-size: 14px; color: #2c3e50; line-height: 1.4; }
+  .doc-langs { display: flex; gap: 5px; flex-shrink: 0; }
+  .lang-badge {
+    padding: 2px 8px; border-radius: 10px; font-size: 11px; font-weight: 700;
+    letter-spacing: 0.5px;
+  }
+  .lang-en { background: #dbeafe; color: #1d4ed8; }
+  .lang-es { background: #fef3c7; color: #92400e; }
+  .doc-link {
+    display: inline-flex; align-items: center; gap: 5px;
+    padding: 6px 14px; border-radius: 16px; font-size: 13px; font-weight: 600;
+    background: #4a9fd4; color: white; text-decoration: none;
+    transition: background .2s; flex-shrink: 0;
+  }
+  .doc-link:hover { background: #2c7fb8; }
+  .no-results {
+    text-align: center; padding: 60px 20px; color: #8a9ab0; font-size: 15px;
+  }
+
+  /* COLOR DOTS PER CATEGORY */
+  .dot-tile     { background: #e67e22; }
+  .dot-maint    { background: #e74c3c; }
+  .dot-mix      { background: #27ae60; }
+  .dot-ext      { background: #8e44ad; }
+  .dot-prod     { background: #2980b9; }
+  .dot-tool     { background: #f39c12; }
+  .dot-plant    { background: #16a085; }
+  .dot-general  { background: #7f8c8d; }
+
+  footer {
+    text-align: center; padding: 28px; color: #8a9ab0; font-size: 12px;
+    border-top: 1px solid #e2e8f0; margin-top: 20px;
+  }
+</style>
+<script src="search_index.js"></script>
+</head>
+<body>
+
+<header>
+  <div>
+    <div class="logo">VH FAST</div>
+    <div class="tagline">Vortex Hydra — Field After Sales & Technical Support</div>
+  </div>
+  <div>
+    <h1>Concrete Roof Tile — Technical Documentation Library</h1>
+    <div class="tagline" style="margin-top:5px;">Maintenance · Settings · Production Technology · Tile Quality</div>
+  </div>
+</header>
+
+<div class="toolbar">
+  <div class="search-wrap">
+    <span class="icon">&#128269;</span>
+    <input type="text" id="searchInput" placeholder="Search documents…" oninput="renderDocs()">
+  </div>
+  <div class="filters" id="filters"></div>
+  <div class="doc-count" id="docCount"></div>
+</div>
+
+<main id="main"></main>
+
+<footer>
+  VH FAST — Vortex Hydra Field After Sales & Technical Support &nbsp;|&nbsp; © 2025
+</footer>
+
+<script>
+const CATEGORIES = [
+  { key: "TILE TECHNOLOGY",            label: "Tile Technology",         dot: "dot-tile" },
+  { key: "MAINTENANCE PROCEDURES",     label: "Maintenance",             dot: "dot-maint" },
+  { key: "MIXING & BATCHING TECHNOLOGY", label: "Mixing & Batching",    dot: "dot-mix" },
+  { key: "EXTRUDER SETTINGS",          label: "Extruder Settings",       dot: "dot-ext" },
+  { key: "PRODUCTION TECHNOLOGY",      label: "Production Technology",   dot: "dot-prod" },
+  { key: "TOOLINGS ANALYSIS",          label: "Toolings Analysis",       dot: "dot-tool" },
+  { key: "PLANT EVALUATIONS",          label: "Plant Evaluations",       dot: "dot-plant" },
+  { key: "GENERAL EVALUATIONS",        label: "General Evaluations",     dot: "dot-general" },
+];
+
+const DOCS = [
+  // ── TILE TECHNOLOGY ──────────────────────────────────────────────────────────
+  { id:"1",   cat:"TILE TECHNOLOGY", lang:["EN"], title:"Problems with broken tiles on the roof",
+    file:"TILE TECHNOLOGY/1.Problems with broken tiles on the roof.pdf" },
+  { id:"5",   cat:"TILE TECHNOLOGY", lang:["EN"], title:"Notes on efflorescence",
+    file:"TILE TECHNOLOGY/5.Notes on efflorescence.pdf" },
+  { id:"10",  cat:"TILE TECHNOLOGY", lang:["ES"], title:"French tile quality extrusion",
+    file:"TILE TECHNOLOGY/10.French tile quality extrusion.pdf" },
+  { id:"12",  cat:"TILE TECHNOLOGY", lang:["ES"], title:"Reasons of tiles profile changes",
+    file:"TILE TECHNOLOGY/12.Reasons of tiles profile changes.pdf" },
+  { id:"16",  cat:"TILE TECHNOLOGY", lang:["EN"], title:"Work procedure: Wet Tile Measurement Control",
+    file:"TILE TECHNOLOGY/16.Work procedure Wet Tile Measurement Control.pdf" },
+  { id:"19",  cat:"TILE TECHNOLOGY", lang:["EN"], title:"Corner tiles breakage on the roof",
+    file:"TILE TECHNOLOGY/19.CORNER TILES BREAKAGE ON THE ROOF.pdf" },
+  { id:"30",  cat:"TILE TECHNOLOGY", lang:["EN"], title:"Production quality at customer site",
+    file:"TILE TECHNOLOGY/30.Production quality at customer site.pdf" },
+  { id:"31",  cat:"TILE TECHNOLOGY", lang:["EN"], title:"Tiles production suggestions and methods",
+    file:"TILE TECHNOLOGY/31.Tiles production suggestions and methods.pdf" },
+
+  // ── MAINTENANCE PROCEDURES ───────────────────────────────────────────────────
+  { id:"2",   cat:"MAINTENANCE PROCEDURES", lang:["EN"], title:"Cleaning pallets",
+    file:"MAINTENANCE PROCEDURES/2.Cleaning pallets.pdf" },
+  { id:"13",  cat:"MAINTENANCE PROCEDURES", lang:["EN"], title:"Pushing system maintenance",
+    file:"MAINTENANCE PROCEDURES/13.Pushing system maintenance.pdf" },
+  { id:"24",  cat:"MAINTENANCE PROCEDURES", lang:["EN"], title:"Maintenance flow charts",
+    file:"MAINTENANCE PROCEDURES/24.Maintenance flow charts.pdf" },
+  { id:"37",  cat:"MAINTENANCE PROCEDURES", lang:["EN"], title:"Extruder machine maintenance excursus",
+    file:"MAINTENANCE PROCEDURES/37.Extruder machine maintenance excursus.pdf" },
+  { id:"40",  cat:"MAINTENANCE PROCEDURES", lang:["EN"], title:"Tensioning the push chain",
+    file:"MAINTENANCE PROCEDURES/40.Tensioning the push chain 240925.pdf" },
+  { id:"40-0",  cat:"MAINTENANCE PROCEDURES", lang:["ES"], title:"Push chain checklist — Master list",
+    file:"MAINTENANCE PROCEDURES/Extruder pushing system/0 Checklist MTO PVO IBF Cadena Empuje LIST 220925 1943.pdf" },
+  { id:"40-A1", cat:"MAINTENANCE PROCEDURES", lang:["ES"], title:"Push chain checklist — A.1.1",
+    file:"MAINTENANCE PROCEDURES/Extruder pushing system/Checklist MTO PVO IBF Cadena Empuje A.1.1 230925 1943.pdf" },
+  { id:"40-B1", cat:"MAINTENANCE PROCEDURES", lang:["ES"], title:"Push chain checklist — B.2.1",
+    file:"MAINTENANCE PROCEDURES/Extruder pushing system/Checklist MTO PVO IBF Cadena Empuje B.2.1 220925 1943.pdf" },
+  { id:"40-B2", cat:"MAINTENANCE PROCEDURES", lang:["ES"], title:"Push chain checklist — B.2.2",
+    file:"MAINTENANCE PROCEDURES/Extruder pushing system/Checklist MTO PVO IBF Cadena Empuje B.2.2 220925 1943.pdf" },
+  { id:"40-B3", cat:"MAINTENANCE PROCEDURES", lang:["ES"], title:"Push chain checklist — B.2.3",
+    file:"MAINTENANCE PROCEDURES/Extruder pushing system/Checklist MTO PVO IBF Cadena Empuje B.2.3 220925 1943.pdf" },
+  { id:"40-B4", cat:"MAINTENANCE PROCEDURES", lang:["ES"], title:"Push chain checklist — B.2.4",
+    file:"MAINTENANCE PROCEDURES/Extruder pushing system/Checklist MTO PVO IBF Cadena Empuje B.2.4 220925 1943.pdf" },
+  { id:"40-B5", cat:"MAINTENANCE PROCEDURES", lang:["ES"], title:"Push chain checklist — B.2.5",
+    file:"MAINTENANCE PROCEDURES/Extruder pushing system/Checklist MTO PVO IBF Cadena Empuje B.2.5 220925 1943.pdf" },
+  { id:"40-C6", cat:"MAINTENANCE PROCEDURES", lang:["ES"], title:"Push chain checklist — C.2.6",
+    file:"MAINTENANCE PROCEDURES/Extruder pushing system/Checklist MTO PVO IBF Cadena Empuje C.2.6 220925 1943.pdf" },
+  { id:"40-D7", cat:"MAINTENANCE PROCEDURES", lang:["ES"], title:"Push chain checklist — D.2.7",
+    file:"MAINTENANCE PROCEDURES/Extruder pushing system/Checklist MTO PVO IBF Cadena Empuje D.2.7 220925 1943.pdf" },
+  { id:"40-E8", cat:"MAINTENANCE PROCEDURES", lang:["ES"], title:"Push chain checklist — E.2.8",
+    file:"MAINTENANCE PROCEDURES/Extruder pushing system/Checklist MTO PVO IBF Cadena Empuje E.2.8 220925 1943.pdf" },
+  { id:"40-M1", cat:"MAINTENANCE PROCEDURES", lang:["ES"], title:"Push chain checklist — M.3.1",
+    file:"MAINTENANCE PROCEDURES/Extruder pushing system/Checklist MTO PVO IBF Cadena Empuje M.3.1 220925 1943.pdf" },
+  { id:"40-M2", cat:"MAINTENANCE PROCEDURES", lang:["ES"], title:"Push chain checklist — M.3.2",
+    file:"MAINTENANCE PROCEDURES/Extruder pushing system/Checklist MTO PVO IBF Cadena Empuje M.3.2 220925 1943.pdf" },
+  { id:"40-M3", cat:"MAINTENANCE PROCEDURES", lang:["ES"], title:"Push chain checklist — M.3.3",
+    file:"MAINTENANCE PROCEDURES/Extruder pushing system/Checklist MTO PVO IBF Cadena Empuje M.3.3 220925 1943.pdf" },
+  { id:"40-EV", cat:"MAINTENANCE PROCEDURES", lang:["ES"], title:"Push chain — evaluation of timings and responsibilities",
+    file:"MAINTENANCE PROCEDURES/Extruder pushing system/Evaluation of Timings and Responsibilities 220925.pdf" },
+
+  // ── MIXING & BATCHING TECHNOLOGY ────────────────────────────────────────────
+  { id:"3",   cat:"MIXING & BATCHING TECHNOLOGY", lang:["EN"], title:"Sand granulometry",
+    file:"MIXING & BATCHING TECHNOLOGY/3.Sand granulometry.pdf" },
+  { id:"4",   cat:"MIXING & BATCHING TECHNOLOGY", lang:["ES","EN"], title:"Notes on raw materials",
+    file:"MIXING & BATCHING TECHNOLOGY/4.Notes on raw materials.pdf" },
+  { id:"6",   cat:"MIXING & BATCHING TECHNOLOGY", lang:["EN"], title:"Suggestions on concrete mix",
+    file:"MIXING & BATCHING TECHNOLOGY/6.Suggestions on Concrete Mix.pdf" },
+  { id:"18",  cat:"MIXING & BATCHING TECHNOLOGY", lang:["EN"], title:"Raw materials — equipment & installations",
+    file:"MIXING & BATCHING TECHNOLOGY/18.RAW MATERIALS - EQUIPMENT & INSTALLATIONS.pdf" },
+  { id:"27",  cat:"MIXING & BATCHING TECHNOLOGY", lang:["EN"], title:"Customer batching & mixing evaluation",
+    file:"MIXING & BATCHING TECHNOLOGY/27.Customer batching & mixing evaluation.pdf" },
+  { id:"36",  cat:"MIXING & BATCHING TECHNOLOGY", lang:["EN"], title:"Raw materials excursus",
+    file:"MIXING & BATCHING TECHNOLOGY/36.Raw materials excursus.pdf" },
+
+  // ── EXTRUDER SETTINGS ───────────────────────────────────────────────────────
+  { id:"7",   cat:"EXTRUDER SETTINGS", lang:["ES"], title:"Comments on rake machine",
+    file:"EXTRUDER SETTINGS/7.Comments on rake machine.pdf" },
+  { id:"8",   cat:"EXTRUDER SETTINGS", lang:["ES"], title:"System to adjust roller and slipper",
+    file:"EXTRUDER SETTINGS/8.System to adjust roller and slipper.pdf" },
+  { id:"23",  cat:"EXTRUDER SETTINGS", lang:["EN"], title:"Extrusion head settings",
+    file:"EXTRUDER SETTINGS/23.EXTRUSION HEAD SETTINGS.pdf" },
+  { id:"28",  cat:"EXTRUDER SETTINGS", lang:["EN"], title:"Extruder machine evaluations",
+    file:"EXTRUDER SETTINGS/28.Extruder machine evaluations.pdf" },
+  { id:"29",  cat:"EXTRUDER SETTINGS", lang:["EN"], title:"Ridge tile extruder settings",
+    file:"EXTRUDER SETTINGS/29.Ridge tile extruder settings.pdf" },
+  { id:"41",  cat:"EXTRUDER SETTINGS", lang:["EN"], title:"How to synchronize the phase point of the tile cutting (Golob)",
+    file:"EXTRUDER SETTINGS/41.How to synchronize the phase point of the tile cutting Golob 171125.pdf" },
+  { id:"42a", cat:"EXTRUDER SETTINGS", lang:["EN"], title:"Mould misalignment in the extrusion box",
+    file:"EXTRUDER SETTINGS/42.Mould MISALIGNMENT in the  estrusion box 191125.pdf" },
+  { id:"42b", cat:"EXTRUDER SETTINGS", lang:["EN"], title:"Adjusting guides, pushing chain and extruder box",
+    file:"EXTRUDER SETTINGS/42.ADJUSTING THE GUIDES PUSHING CHAIN AND EXTRUDER BOX 201125.pdf" },
+
+  // ── PRODUCTION TECHNOLOGY ───────────────────────────────────────────────────
+  { id:"11",  cat:"PRODUCTION TECHNOLOGY", lang:["EN"], title:"Extruder operators and maintenance people",
+    file:"PRODUCTION TECHNOLOGY/11.Extruder operators-maintenance people.pdf" },
+  { id:"15",  cat:"PRODUCTION TECHNOLOGY", lang:["EN"], title:"Tools used for measurements & testing",
+    file:"PRODUCTION TECHNOLOGY/15.TOOLS USED FOR MEASUREMENTS & TESTING.pdf" },
+  { id:"20",  cat:"PRODUCTION TECHNOLOGY", lang:["EN"], title:"Interlock slurry cleaner",
+    file:"PRODUCTION TECHNOLOGY/20.INTERLOCK SLURRY CLEANER.pdf" },
+  { id:"21",  cat:"PRODUCTION TECHNOLOGY", lang:["EN"], title:"Checking production data",
+    file:"PRODUCTION TECHNOLOGY/21.CHECKING PRODUCTION DATA.pdf" },
+  { id:"22",  cat:"PRODUCTION TECHNOLOGY", lang:["ES"], title:"Problems with microcracks in new moulds",
+    file:"PRODUCTION TECHNOLOGY/22.PROBLEMAS DE MICROFISURAS EN MOLDES NUEVOS.pdf" },
+  { id:"26",  cat:"PRODUCTION TECHNOLOGY", lang:["EN"], title:"Slurry application procedures",
+    file:"PRODUCTION TECHNOLOGY/26.Slurry application procedures.pdf" },
+  { id:"34",  cat:"PRODUCTION TECHNOLOGY", lang:["ES"], title:"Tile production operators",
+    file:"PRODUCTION TECHNOLOGY/34.Operarios para produciòn de tejas.pdf" },
+  { id:"38",  cat:"PRODUCTION TECHNOLOGY", lang:["EN"], title:"Problems with acrylic",
+    file:"PRODUCTION TECHNOLOGY/38.Problems with acrylic.pdf" },
+  { id:"44",  cat:"PRODUCTION TECHNOLOGY", lang:["EN"], title:"Report on thickness and weight measurements",
+    file:"PRODUCTION TECHNOLOGY/44.REPORT ON THICKNESS AND WEIGHT MEASUREMENTS 281125.pdf" },
+  { id:"45",  cat:"PRODUCTION TECHNOLOGY", lang:["EN"], title:"Note on slipper wear control",
+    file:"PRODUCTION TECHNOLOGY/45.NOTE ON SLIPPER WEAR CONTROL 031225.pdf" },
+  { id:"46",  cat:"PRODUCTION TECHNOLOGY", lang:["EN"], title:"Work procedure: Wet Tile Measurement Control (2025)",
+    file:"PRODUCTION TECHNOLOGY/46.Work procedure Wet Tile Measurement Control 2025 051225 1122.pdf" },
+  { id:"46a", cat:"PRODUCTION TECHNOLOGY", lang:["EN"], title:"Wet tile thickness control procedure",
+    file:"PRODUCTION TECHNOLOGY/46a.WET TILE THICKNESS CONTROL PROCEDURE 051225.pdf" },
+  { id:"46b", cat:"PRODUCTION TECHNOLOGY", lang:["EN"], title:"Instruments and accessories for thickness measurement",
+    file:"PRODUCTION TECHNOLOGY/46b.INSTRUMENTS AND ACCESSORIES FOR THICKNESS MEASUREMENT 051225.pdf" },
+  { id:"46c", cat:"PRODUCTION TECHNOLOGY", lang:["EN"], title:"Roman wet tile measurements",
+    file:"PRODUCTION TECHNOLOGY/46.c ROMAN WET TILE Measurements 051225.pdf" },
+
+  // ── TOOLINGS ANALYSIS ───────────────────────────────────────────────────────
+  { id:"9",   cat:"TOOLINGS ANALYSIS", lang:["ES","EN"], title:"Considerations on problems with Abece TC Slippers",
+    file:"TOOLINGS ANALYSIS/9.Considerations on problems with Abece TC Slippers.pdf" },
+  { id:"14",  cat:"TOOLINGS ANALYSIS", lang:["ES"], title:"Comments on TC slippers adjustment for Abece line",
+    file:"TOOLINGS ANALYSIS/14.Comments on TC slippers adjustment for Abece line.pdf" },
+  { id:"17",  cat:"TOOLINGS ANALYSIS", lang:["EN"], title:"Adjusting a coupling big roller with big slipper",
+    file:"TOOLINGS ANALYSIS/17.Adjusting a coupling big roller with big slipper.pdf" },
+  { id:"35",  cat:"TOOLINGS ANALYSIS", lang:["ES"], title:"Carbide slipper for Abece extrusion head",
+    file:"TOOLINGS ANALYSIS/35.Planteamiento zapata widia para cabezal ABECE.pdf" },
+  { id:"39",  cat:"TOOLINGS ANALYSIS", lang:["EN"], title:"Notes on roller and slipper wear",
+    file:"TOOLINGS ANALYSIS/39.Notes on roller and slipper wear 141125.pdf" },
+
+  // ── PLANT EVALUATIONS ───────────────────────────────────────────────────────
+  { id:"25",  cat:"PLANT EVALUATIONS", lang:["EN"], title:"Ridge packer evaluations at customer site",
+    file:"PLANT EVALUATIONS/25.Ridge packer evaulations at customer site.pdf" },
+  { id:"32",  cat:"PLANT EVALUATIONS", lang:["EN"], title:"Starting new plant — checking list",
+    file:"PLANT EVALUATIONS/32.Starting new plant checking list.pdf" },
+  { id:"33",  cat:"PLANT EVALUATIONS", lang:["EN"], title:"Roof tile plant — overall evaluation & suggestions",
+    file:"PLANT EVALUATIONS/33.Roof tile plant overall evaluation & suggestions.pdf" },
+  { id:"43",  cat:"PLANT EVALUATIONS", lang:["EN"], title:"Technical improvement proposal for rotary system",
+    file:"PLANT EVALUATIONS/43.TECHNICAL IMPROVEMENT PROPOSAL FOR ROTARY SYSTEM 201125.pdf" },
+
+  // ── GENERAL EVALUATIONS ─────────────────────────────────────────────────────
+  { id:"G1",  cat:"GENERAL EVALUATIONS", lang:["EN"], title:"Comprehensive efficiency analysis and improvement strategy",
+    file:"GENERAL EVALUATIONS FOR IBF DK/1 COMPREHENSIVE EFFICIENCY ANALYSIS AND IMPROVEMENT STRATEGY 011025.pdf" },
+  { id:"G2",  cat:"GENERAL EVALUATIONS", lang:["EN"], title:"Visual, auditory and tactile preventive maintenance",
+    file:"GENERAL EVALUATIONS FOR IBF DK/2 Visual, Auditory and Tactile Preventive Maintenance 230925.pdf" },
+  { id:"G3",  cat:"GENERAL EVALUATIONS", lang:["ES"], title:"Checklist — rubber band and cement screw conveyor",
+    file:"GENERAL EVALUATIONS FOR IBF DK/3 CHECKLIST de Banda Goma y Sinfin cemento 300925.pdf" },
+];
+
+// ── State ──────────────────────────────────────────────────────────────────────
+let activeFilter = "ALL";
+
+// ── Build category filter buttons ─────────────────────────────────────────────
+function buildFilters() {
+  const wrap = document.getElementById("filters");
+  const all = document.createElement("button");
+  all.className = "filter-btn active";
+  all.textContent = "All";
+  all.onclick = () => setFilter("ALL", all);
+  wrap.appendChild(all);
+
+  CATEGORIES.forEach(cat => {
+    const btn = document.createElement("button");
+    btn.className = "filter-btn";
+    btn.textContent = cat.label;
+    btn.onclick = () => setFilter(cat.key, btn);
+    wrap.appendChild(btn);
+  });
+}
+
+function setFilter(key, btn) {
+  activeFilter = key;
+  document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
+  btn.classList.add("active");
+  renderDocs();
+}
+
+// ── Render ─────────────────────────────────────────────────────────────────────
+function renderDocs() {
+  const query = document.getElementById("searchInput").value.trim().toLowerCase();
+  const main = document.getElementById("main");
+  main.innerHTML = "";
+
+  let totalVisible = 0;
+
+  CATEGORIES.forEach(cat => {
+    if (activeFilter !== "ALL" && activeFilter !== cat.key) return;
+
+    const words = query.split(/\s+/).filter(Boolean);
+    const filtered = DOCS.filter(d => {
+      if (d.cat !== cat.key) return false;
+      if (words.length) {
+        const filename = d.file.split("/").pop().replace(/%23/g, "#").replace(/%20/g, " ");
+        const fullText = (typeof SEARCH_INDEX !== "undefined" && SEARCH_INDEX[filename]) || "";
+        const searchable = [d.title, d.cat, cat.label, d.lang.join(" "), fullText].join(" ").toLowerCase();
+        if (!words.every(w => searchable.includes(w))) return false;
+      }
+      return true;
+    });
+
+    if (filtered.length === 0) return;
+    totalVisible += filtered.length;
+
+    const group = document.createElement("div");
+    group.className = "section-group";
+
+    const header = document.createElement("div");
+    header.className = "section-title";
+    header.innerHTML = `<span class="dot ${cat.dot}"></span>${cat.label} <span style="margin-left:auto;font-size:12px;font-weight:400;opacity:.8">${filtered.length} doc${filtered.length > 1 ? "s" : ""}</span>`;
+    group.appendChild(header);
+
+    const body = document.createElement("div");
+    body.className = "section-body";
+
+    filtered.forEach(doc => {
+      const row = document.createElement("div");
+      row.className = "doc-row";
+
+      const numEl = document.createElement("div");
+      numEl.className = "doc-num";
+      numEl.textContent = doc.id;
+      row.appendChild(numEl);
+
+      const titleEl = document.createElement("div");
+      titleEl.className = "doc-title";
+      titleEl.textContent = doc.title;
+      row.appendChild(titleEl);
+
+      const langsEl = document.createElement("div");
+      langsEl.className = "doc-langs";
+      doc.lang.forEach(l => {
+        const badge = document.createElement("span");
+        badge.className = "lang-badge lang-" + l.toLowerCase();
+        badge.textContent = l;
+        langsEl.appendChild(badge);
+      });
+      row.appendChild(langsEl);
+
+      const link = document.createElement("a");
+      link.className = "doc-link";
+      link.href = doc.file;
+      link.target = "_blank";
+      link.innerHTML = "&#128196; Open PDF";
+      row.appendChild(link);
+
+      body.appendChild(row);
+    });
+
+    group.appendChild(body);
+    main.appendChild(group);
+  });
+
+  if (totalVisible === 0) {
+    main.innerHTML = `<div class="no-results">No documents found for "<strong>${query}</strong>"</div>`;
+  }
+
+  document.getElementById("docCount").textContent = `${totalVisible} document${totalVisible !== 1 ? "s" : ""}`;
+}
+
+// ── Init ───────────────────────────────────────────────────────────────────────
+buildFilters();
+renderDocs();
+</script>
+</body>
+</html>
+
