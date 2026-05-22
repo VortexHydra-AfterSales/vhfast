@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -11,6 +11,19 @@
   header .logo { font-size: 42px; font-weight: 800; letter-spacing: 2px; border: 3px solid #4a9fd4; display: inline-block; padding: 10px 24px; border-radius: 6px; margin-bottom: 16px; }
   header h1 { font-size: 20px; font-weight: 400; color: #a8c8e8; letter-spacing: 1px; }
   main { flex: 1; max-width: 1000px; margin: 50px auto; padding: 0 24px; width: 100%; }
+
+  /* GUIDE SECTION */
+  .guide-section { background: white; border-radius: 12px; padding: 32px 36px; box-shadow: 0 4px 16px rgba(0,0,0,0.07); margin-bottom: 36px; border-left: 5px solid #4a9fd4; }
+  .guide-section h2 { font-size: 16px; font-weight: 700; color: #1a2e4a; margin-bottom: 18px; letter-spacing: 0.5px; }
+  .guide-lang { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+  .guide-lang h3 { font-size: 13px; font-weight: 700; color: #4a9fd4; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; }
+  .guide-lang p { font-size: 13px; color: #6b7a8d; line-height: 1.7; margin-bottom: 10px; }
+  .guide-lang ul { padding-left: 18px; }
+  .guide-lang ul li { font-size: 13px; color: #6b7a8d; line-height: 1.7; }
+  .guide-lang ul li strong { color: #2c3e50; }
+  @media (max-width: 700px) { .guide-lang { grid-template-columns: 1fr; } }
+
+  /* CARDS */
   .card-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 24px; }
   .card { background: white; border-radius: 12px; padding: 32px 28px; box-shadow: 0 4px 16px rgba(0,0,0,0.08); text-decoration: none; color: inherit; border-top: 5px solid #4a9fd4; transition: transform .2s, box-shadow .2s; display: flex; flex-direction: column; gap: 12px; }
   .card:hover { transform: translateY(-4px); box-shadow: 0 8px 28px rgba(0,0,0,0.13); }
@@ -22,28 +35,78 @@
   .card .meta { font-size: 13px; font-weight: 600; color: #4a9fd4; margin-top: auto; padding-top: 12px; border-top: 1px solid #f0f3f7; }
   .card.blanes .meta { color: #27ae60; }
   .card.spare .meta { color: #e67e22; }
+  @media (max-width: 700px) { .card-grid { grid-template-columns: 1fr; } }
 
   /* CONTACT SECTION */
   .contact-section { margin-top: 48px; background: white; border-radius: 12px; padding: 32px 36px; box-shadow: 0 4px 16px rgba(0,0,0,0.07); }
-  .contact-section h2 { font-size: 16px; font-weight: 700; color: #1a2e4a; margin-bottom: 20px; text-align: center; letter-spacing: 0.5px; }
-  .contact-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
-  .contact-btn { display: inline-flex; align-items: center; gap: 10px; padding: 14px 28px; border-radius: 30px; font-size: 15px; font-weight: 600; text-decoration: none; transition: transform .2s, box-shadow .2s; }
-  .contact-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.15); }
+  .contact-section > h2 { font-size: 16px; font-weight: 700; color: #1a2e4a; margin-bottom: 24px; text-align: center; letter-spacing: 0.5px; }
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .contact-card { border: 1px solid #e2e8f0; border-radius: 10px; padding: 24px 28px; }
+  .contact-card .contact-header { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
+  .contact-card .flag { font-size: 26px; line-height: 1; }
+  .contact-card .company { font-size: 14px; font-weight: 700; color: #1a2e4a; }
+  .contact-card .name { font-size: 15px; font-weight: 600; color: #2c3e50; margin-bottom: 4px; }
+  .contact-card .role { font-size: 12px; color: #8a9ab0; margin-bottom: 14px; }
+  .contact-card .address { font-size: 12px; color: #6b7a8d; line-height: 1.6; margin-bottom: 14px; }
+  .contact-card .contact-lines { display: flex; flex-direction: column; gap: 6px; margin-bottom: 16px; }
+  .contact-card .contact-line { font-size: 12px; color: #6b7a8d; }
+  .contact-card .contact-line span { font-weight: 600; color: #2c3e50; }
+  .contact-btns { display: flex; gap: 8px; flex-wrap: wrap; }
+  .contact-btn { display: inline-flex; align-items: center; gap: 8px; padding: 10px 18px; border-radius: 24px; font-size: 13px; font-weight: 600; text-decoration: none; transition: transform .2s, box-shadow .2s; }
+  .contact-btn:hover { transform: translateY(-2px); box-shadow: 0 4px 14px rgba(0,0,0,0.13); }
   .btn-email { background: #1a2e4a; color: white; }
   .btn-whatsapp { background: #25d366; color: white; }
   .btn-phone { background: #4a9fd4; color: white; }
-  .contact-btn .icon { font-size: 20px; }
+  @media (max-width: 700px) { .contact-grid { grid-template-columns: 1fr; } }
 
   footer { text-align: center; padding: 28px; color: #8a9ab0; font-size: 12px; border-top: 1px solid #e2e8f0; margin-top: 40px; }
-  @media (max-width: 700px) { .card-grid { grid-template-columns: 1fr; } }
 </style>
 </head>
 <body>
+
+<script>
+  // Auth check — redirects to login if session is not authenticated
+  const CORRECT_HASH = "9c67aa488267aeef91cf970d3086d546c3b5312e4096873e9cb06cade35fd7d9";
+  if (sessionStorage.getItem("vhfast_auth") !== CORRECT_HASH) {
+    window.location.replace("login.html");
+  }
+</script>
+
 <header>
   <div class="logo">VH FAST</div>
   <h1>Vortex Hydra &mdash; Field After Sales &amp; Technical Support</h1>
 </header>
+
 <main>
+
+  <!-- GUIDE SECTION -->
+  <div class="guide-section">
+    <h2>&#128196; Come usare questo portale &nbsp;/&nbsp; How to use this portal</h2>
+    <div class="guide-lang">
+      <div>
+        <h3>&#127470;&#127481; Italiano</h3>
+        <p>VH FAST raccoglie tutta la documentazione tecnica e di assistenza per gli impianti Vortex Hydra. Il portale &egrave; diviso in tre sezioni:</p>
+        <ul>
+          <li><strong>Procedure Operative Standard (SOP)</strong> &mdash; Istruzioni operative per le linee FP McCann di Cadeby (UK): Linea 1 (TLE Profile) e Linea 3 (Sea Wave 5). Rivolte a tecnici di linea e responsabili di produzione.</li>
+          <li><strong>Manuali Ricambi</strong> &mdash; Specifiche componenti e liste ricambi in formato PDF ed Excel. Utili per acquisti e magazzino.</li>
+          <li><strong>Knowledge Base Tecnica</strong> &mdash; Documentazione approfondita su manutenzione, impostazioni estrusori, tecnologia delle tegole e valutazioni degli impianti, a cura di Miguel Blanes.</li>
+        </ul>
+        <p style="margin-top:10px;">I documenti sono <strong>ricercabili per testo completo</strong>. Usa la barra di ricerca all&rsquo;interno di ciascuna sezione per trovare rapidamente quello che ti serve.</p>
+      </div>
+      <div>
+        <h3>&#127468;&#127463; English</h3>
+        <p>VH FAST brings together all technical and after-sales documentation for Vortex Hydra plant installations. The portal is divided into three sections:</p>
+        <ul>
+          <li><strong>Standard Operating Procedures (SOP)</strong> &mdash; Operational instructions for FP McCann&rsquo;s Cadeby (UK) lines: Line 1 (TLE Profile) and Line 3 (Sea Wave 5). For line technicians and production managers.</li>
+          <li><strong>Spare Parts Manuals</strong> &mdash; Component specs and parts lists in PDF and Excel format. For purchasing and warehouse teams.</li>
+          <li><strong>Technical Knowledge Base</strong> &mdash; In-depth documentation on maintenance, extruder settings, tile technology, and plant evaluations, curated by Miguel Blanes.</li>
+        </ul>
+        <p style="margin-top:10px;">All documents are <strong>full-text searchable</strong>. Use the search bar within each section to quickly find what you need.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- DOCUMENT CARDS -->
   <div class="card-grid">
     <a class="card" href="sops/index.html">
       <div class="card-icon">&#9881;</div>
@@ -65,25 +128,64 @@
     </a>
   </div>
 
+  <!-- CONTACT SECTION -->
   <div class="contact-section">
-    <h2>&#128222; Contact Vortex Hydra After Sales Service</h2>
-    <div class="contact-buttons">
-      <a class="contact-btn btn-email" href="mailto:roberto_berti@vortexhydra.com">
-        <span class="icon">&#9993;</span> roberto_berti@vortexhydra.com
-      </a>
-      <a class="contact-btn btn-whatsapp" href="https://wa.me/393487407352">
-        <span class="icon">&#128241;</span> WhatsApp
-      </a>
-      <a class="contact-btn btn-phone" href="tel:+393487407352">
-        <span class="icon">&#128222;</span> +39 348 740 7352
-      </a>
+    <h2>&#128222; Contact / Contatti</h2>
+    <div class="contact-grid">
+
+      <!-- Roberto Berti - Italy -->
+      <div class="contact-card">
+        <div class="contact-header">
+          <span class="flag">&#127470;&#127481;</span>
+          <span class="company">Vortex Hydra S.r.l.</span>
+        </div>
+        <div class="name">Roberto Berti</div>
+        <div class="role">Group of Companies After Sales Manager</div>
+        <div class="address">
+          Via Argine Volano, 355<br>
+          44034 Fossalta di Copparo (FE) &mdash; Italy
+        </div>
+        <div class="contact-lines">
+          <div class="contact-line"><span>Tel:</span> +39 0532 879519</div>
+          <div class="contact-line"><span>Cell:</span> +39 348 740 7352</div>
+          <div class="contact-line"><span>Fax:</span> +39 0532 866766</div>
+          <div class="contact-line"><span>Email:</span> roberto_berti@vortexhydra.com</div>
+        </div>
+        <div class="contact-btns">
+          <a class="contact-btn btn-email" href="mailto:roberto_berti@vortexhydra.com">&#9993; Email</a>
+          <a class="contact-btn btn-whatsapp" href="https://wa.me/393487407352">&#128241; WhatsApp</a>
+          <a class="contact-btn btn-phone" href="tel:+390532879519">&#128222; Call</a>
+        </div>
+      </div>
+
+      <!-- Chris Dale - UK -->
+      <div class="contact-card">
+        <div class="contact-header">
+          <span class="flag">&#127468;&#127463;</span>
+          <span class="company">Vortex Hydra (UK) Ltd</span>
+        </div>
+        <div class="name">Chris Dale</div>
+        <div class="role">&nbsp;</div>
+        <div class="address">
+          Kingmoor Industrial Estate, Kingmoor Road<br>
+          Carlisle CA3 9QJ &mdash; United Kingdom
+        </div>
+        <div class="contact-lines">
+          <div class="contact-line"><span>Tel:</span> +44 (0)1228 510800</div>
+          <div class="contact-line"><span>DDI:</span> 01228 585762</div>
+          <div class="contact-line"><span>Email:</span> sales@vortexhydra.co.uk</div>
+        </div>
+        <div class="contact-btns">
+          <a class="contact-btn btn-email" href="mailto:sales@vortexhydra.co.uk">&#9993; Email</a>
+          <a class="contact-btn btn-phone" href="tel:+441228510800">&#128222; Call</a>
+        </div>
+      </div>
+
     </div>
   </div>
+
 </main>
-<footer>VH FAST &mdash; Vortex Hydra Field After Sales &amp; Technical Support &nbsp;|&nbsp; &copy; 2025 &nbsp;&nbsp; ⚽ FORZA SPAL &nbsp;|&nbsp; Non camminerai mai sola</footer>
+
+<footer>VH FAST &mdash; Vortex Hydra Field After Sales &amp; Technical Support &nbsp;|&nbsp; &copy; 2025 &nbsp;&nbsp; &#9917; FORZA SPAL &nbsp;|&nbsp; Non camminerai mai sola</footer>
 </body>
 </html>
-
-
-
-
