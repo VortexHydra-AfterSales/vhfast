@@ -44,7 +44,7 @@
   .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
   .contact-card { border: 1px solid #e2e8f0; border-radius: 10px; padding: 24px 28px; }
   .contact-card .contact-header { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
-  .contact-card .flag { font-size: 26px; }
+  .contact-card .flag img { width: 28px; height: auto; border-radius: 3px; box-shadow: 0 1px 4px rgba(0,0,0,0.2); }
   .contact-card .company { font-size: 14px; font-weight: 700; color: #1a2e4a; }
   .contact-card .name { font-size: 15px; font-weight: 600; color: #2c3e50; margin-bottom: 4px; }
   .contact-card .role { font-size: 12px; color: #8a9ab0; margin-bottom: 14px; }
@@ -120,7 +120,7 @@
     <div class="contact-grid">
       <div class="contact-card">
         <div class="contact-header">
-          <span class="flag">&#127470;&#127481;</span>
+          <span class="flag"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAVCAYAAABVAo5cAAAC30lEQVRIx5WUvW4bRxSFv/mhZApx+AdFXZwmgQWVUZs6gHqXeY4gnd8iT5Aqr+IuCOwqcgwDsiwRlBD9UTP3nhRcUUtKTKhZDHabne+ec+6dwOtXG51h2vNquyZ7EaUdd/Ui6hIU3Cm/7v90/cPO7kUIYQJMgLGksaQxMMk5nx0eHl4cHBxMadYrSD/u7fW2SvwKC98geylpP8dB+Lma7ZPjLil87bAJwhEgcNEb9BkOh0iyWuu5mY1rrWMzG5dSJqWUsy//+vDP77vfXyOZRJDbJrf05NrpBF4E0strL/3szi88S102EkQgAEGg+90bDdje3sbdk5kNa61DM/vWzKi1YmaErS0uYnJQlRRDCClIIQaRgSpxWUXGvctmBzqxAXgLNvsOQM6Zx5Yk3J3U63OTcnRpAwmCiJptSVyaIUGeA9wfApm9xeoVQiClRCdG7kpSqxhJzB7HNVPYwGIL5gtA/hPZgkjIHTUFz2HNtyPyPYCVlq7BW4CtAkpqWboA8IWmWZM4A6Lml0Wgz4HuLYUOfmdlO8u1BC4AEA/UzTKcNwwz2ALoqdD/ATJXqCWYP9HOxtKlzGjslXw5w5alD/JcT2Fz/BLs4c73yngcJGfdENsHPwb0uUJfUuV+P4PzA9ZQuNSZLMEWu9RXWLpuhvOslqxtFbHG4D9xDqUFIGtbqvaYrHfTLFrKI0Bf0TRmYE2OzSVQS6HWSkqJEMJKpN9BVnTofYa3FW4FxcEczIWrNuWm00+f08dnH0kpkXN+dHszz+2mqRLFnRs552YY3MwsvSxnmL2j2Hucz7ifoXCLXEjp/HTSPdo8ei6pn3MedDqdUUpplHMe5Zx7McY0OTnhuBZobhS/A8qnU9eHK7e3kr/JoN+Y1jeYv6P4e+z2mJ0/znnNfAA7391sXg2uvuh2u/1SymA6nY5ijCN3HwEDoH96cvL8qJRuDOrI5RVu5DpX1LFLf1fj7fTs05//AmXcuEikryoYAAAAAElFTkSuQmCC" alt="Italy"></span>
           <span class="company">Vortex Hydra S.r.l.</span>
         </div>
         <div class="name">Roberto Berti</div>
@@ -140,7 +140,7 @@
       </div>
       <div class="contact-card">
         <div class="contact-header">
-          <span class="flag">&#127468;&#127463;</span>
+          <span class="flag"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAVCAMAAABi3H5uAAACH1BMVEVHcEwCH1zEydcCK2tTY4YAFk0AGVUCIWIAGlMAHFAAEUACKGY1SXgmQHG5j5UAFEm7vcidCR2zFDMAED8AE0XJiZS6gosUK1zJycm+aXeYdImzZ3WkFy6xOU0AAIDa2douQnOYordfdp1CWIKsYmyLj5qtFDOTCRy+TGeTCx2sFjLEiZOxanbIkZpUX381QWVXbZLV1dXRrbbf3d3CZHqXQUu7u7sAAFWTMz6qqqrIwsLHEXjDDSnHDyzKETHbYnjLEzXtrbgBLXIBHV7XVmzcaXwAJGtKZpm/DCXqqbT34+bBDSYJMngAF1WmssoAFEzii5nVRV7WUWfrtL3bboDNFThsfqX07vFSX4kMKWjOUmJpeKBEW4naW3LNO1L08/Zvha6Ll7Skp779/P30ztXpo6/Nq7y2Z4Lvvsd7kbbgrbkjRILefIvnm6eyCyIlPHXDFTaRoL7nkJ8pS4jHtL/MbX/33+PIKUPllKDQQVfKHjvR1ePFzN3OXnbfhJT45+rdoa0/VISAZIQgNWiSao3tucL22d6FcJjVS2Pk5+7ww8vap7R2bZaTCRurEzLO0t6Pe5XBb43njJ6mjJquYXffd4m2WWucZ4dca4+BjKbOeYe7TGHi0NRvapPjgJTvxcuiSla9scbSmaO6qLtSb6E1QWTe3eafM0IAED8KHVAADz2yO1Pih5UvOlyaYoBPWn22jJp3SFmqP0x/YH59hpzdsucxAAAAO3RSTlMAe/2nJXv7/YQSp5r+kagH/NHRnZHtbZAx76hIcMcCWv55/KM0eVpa9kdHNLS0o35+BrHafX1aA/cG2kZw1OQAAAI1SURBVCjPPdL1X+JwAMbxr4oIKtit191dL2CDjdhgIwaju0ukDEARsfXOOtvr7vwDb3j3us+v7+fHB1zvPnqc11BTU9PQda3zzIWLLG4TAOAul9XXzwe3btysTspVEqYTHa2tl082cKqqqji83oGeDDg3PhFy5sNphmnN0NCkTVbH1Di1v3fwG3zNQtC6z0nKJRJXymAQy2Uymdm0jcZwTxnYrKtrEOQ3FmgVg3AFo8tBVFMkE2ogUUVfz63ZY76FsDsFM6iST4+jfqMniqiBWZWWu6qppyGvM5+CReLwXBDVh4zuhLnRBGxh8kUgMiPGFn3DEyKROI9JR3FvNU27PRtgY3Jdb5/XarU6u1QrEm5SmHi2iGcCS/HsO7DlyBkMMAyLKgmFI5WRXgrpHLnBh+DR0H8T/k3ApFQqFIc4okUhqRSy68Zy/+jQFCPPwSd9PBLIDA/PijEKEgrmIZ3W4XCMWaCJl6vguyfpchW8+Kg+8lYjEMRnfTN+P7UUeOWh34CdkiqaNIakaHA5ySBWcHqpGNVsLZWJ9wCRpUljHB2fNpmtGoESs7oXnuktj6dsZvVHgKTJ4mdd8EkCQawapRKzmekVfNTCsOkLKJP4JrptqkMqqFBgNgIxkc7FmMWy9QPsHmT3fx1js9kEsbM3ODhZIggisbtijGR/3gOZnoFeHqe2tpbTfuVSS0tHo5rpwzd38wP+bcDv72NxjzC3aeKyTp0/23m1va2+vr6t6/Sd7vt/AIH9vcz9YGhOAAAAAElFTkSuQmCC" alt="United Kingdom"></span>
           <span class="company">Vortex Hydra (UK) Ltd</span>
         </div>
         <div class="name">Chris Dale</div>
