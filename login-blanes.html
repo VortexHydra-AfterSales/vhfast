@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VH FAST – Blanes Knowledge Base</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', Arial, sans-serif; background: #f4f6f9; color: #2c3e50; min-height: 100vh; display: flex; flex-direction: column; }
+  header { background: linear-gradient(135deg, #1a2e4a 0%, #2c4a6e 100%); color: white; padding: 40px; text-align: center; }
+  header .logo { font-size: 42px; font-weight: 800; letter-spacing: 2px; border: 3px solid #4a9fd4; display: inline-block; padding: 10px 24px; border-radius: 6px; margin-bottom: 16px; }
+  header h1 { font-size: 20px; font-weight: 400; color: #a8c8e8; letter-spacing: 1px; }
+  main { flex: 1; display: flex; align-items: center; justify-content: center; padding: 40px 24px; }
+  .login-box { background: white; border-radius: 12px; padding: 48px 40px; box-shadow: 0 4px 24px rgba(0,0,0,0.10); width: 100%; max-width: 400px; text-align: center; border-top: 5px solid #27ae60; }
+  .login-box .section-label { font-size: 13px; font-weight: 700; color: #27ae60; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px; }
+  .login-box h2 { font-size: 22px; font-weight: 700; color: #1a2e4a; margin-bottom: 8px; }
+  .login-box p { font-size: 14px; color: #6b7a8d; margin-bottom: 28px; }
+  .login-box input[type="password"] { width: 100%; padding: 14px 18px; border: 2px solid #e2e8f0; border-radius: 8px; font-size: 16px; outline: none; transition: border-color .2s; margin-bottom: 16px; }
+  .login-box input[type="password"]:focus { border-color: #27ae60; }
+  .login-box button { width: 100%; padding: 14px; background: #27ae60; color: white; border: none; border-radius: 8px; font-size: 16px; font-weight: 600; cursor: pointer; transition: background .2s; }
+  .login-box button:hover { background: #1a8c4a; }
+  .error-msg { color: #e74c3c; font-size: 13px; margin-top: 12px; display: none; }
+  .back-link { display: block; margin-top: 20px; font-size: 13px; color: #8a9ab0; text-decoration: none; }
+  .back-link:hover { color: #27ae60; }
+  footer { text-align: center; padding: 28px; color: #8a9ab0; font-size: 12px; border-top: 1px solid #e2e8f0; }
+</style>
+</head>
+<body>
+<header>
+  <div class="logo">VH FAST</div>
+  <h1>Vortex Hydra &mdash; Field After Sales &amp; Technical Support</h1>
+</header>
+<main>
+  <div class="login-box">
+    <div class="section-label">&#128218; Blanes Knowledge Base</div>
+    <h2>&#128274; VH Internal Access</h2>
+    <p>This section is reserved for Vortex Hydra internal use.<br>Enter the access password to continue.</p>
+    <form id="loginForm">
+      <input type="password" id="pwd" placeholder="Password" autocomplete="current-password" autofocus>
+      <button type="submit">Enter &rarr;</button>
+      <p class="error-msg" id="errorMsg">&#10007; Wrong password. Please try again.</p>
+    </form>
+    <a class="back-link" href="index.html">&larr; Back to portal home</a>
+  </div>
+</main>
+<footer>VH FAST &mdash; Vortex Hydra Field After Sales &amp; Technical Support &nbsp;|&nbsp; &copy; 2025</footer>
+<script>
+  const HASH_BLANES = "d73f4c3f5df280f0cf7ea1f14f5738a1ce43f4c7e955894058da7933f5458880";
+
+  if (sessionStorage.getItem("vhfast_blanes") === HASH_BLANES) {
+    window.location.replace("portal-blanes.html");
+  }
+
+  async function sha256(msg) {
+    const buf = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(msg));
+    return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2,"0")).join("");
+  }
+
+  document.getElementById("loginForm").addEventListener("submit", async function(e) {
+    e.preventDefault();
+    const hash = await sha256(document.getElementById("pwd").value);
+    if (hash === HASH_BLANES) {
+      sessionStorage.setItem("vhfast_blanes", hash);
+      window.location.replace("portal-blanes.html");
+    } else {
+      document.getElementById("errorMsg").style.display = "block";
+    }
+  });
+</script>
+</body>
+</html>

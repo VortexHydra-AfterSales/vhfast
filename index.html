@@ -10,10 +10,10 @@
   header { background: linear-gradient(135deg, #1a2e4a 0%, #2c4a6e 100%); color: white; padding: 40px; text-align: center; }
   header .logo { font-size: 42px; font-weight: 800; letter-spacing: 2px; border: 3px solid #4a9fd4; display: inline-block; padding: 10px 24px; border-radius: 6px; margin-bottom: 16px; }
   header h1 { font-size: 20px; font-weight: 400; color: #a8c8e8; letter-spacing: 1px; }
-  main { flex: 1; max-width: 1000px; margin: 50px auto; padding: 0 24px; width: 100%; }
+  main { flex: 1; max-width: 900px; margin: 50px auto; padding: 0 24px; width: 100%; }
 
   /* GUIDE SECTION */
-  .guide-section { background: white; border-radius: 12px; padding: 32px 36px; box-shadow: 0 4px 16px rgba(0,0,0,0.07); margin-bottom: 36px; border-left: 5px solid #4a9fd4; }
+  .guide-section { background: white; border-radius: 12px; padding: 32px 36px; box-shadow: 0 4px 16px rgba(0,0,0,0.07); margin-bottom: 32px; border-left: 5px solid #4a9fd4; }
   .guide-section h2 { font-size: 16px; font-weight: 700; color: #1a2e4a; margin-bottom: 18px; letter-spacing: 0.5px; }
   .guide-lang { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
   .guide-lang h3 { font-size: 13px; font-weight: 700; color: #4a9fd4; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; }
@@ -23,27 +23,28 @@
   .guide-lang ul li strong { color: #2c3e50; }
   @media (max-width: 700px) { .guide-lang { grid-template-columns: 1fr; } }
 
-  /* CARDS */
-  .card-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 24px; }
-  .card { background: white; border-radius: 12px; padding: 32px 28px; box-shadow: 0 4px 16px rgba(0,0,0,0.08); text-decoration: none; color: inherit; border-top: 5px solid #4a9fd4; transition: transform .2s, box-shadow .2s; display: flex; flex-direction: column; gap: 12px; }
-  .card:hover { transform: translateY(-4px); box-shadow: 0 8px 28px rgba(0,0,0,0.13); }
-  .card.blanes { border-top-color: #27ae60; }
-  .card.spare { border-top-color: #e67e22; }
-  .card-icon { font-size: 38px; }
-  .card h2 { font-size: 18px; font-weight: 700; color: #1a2e4a; }
-  .card p { font-size: 13px; color: #6b7a8d; line-height: 1.6; }
-  .card .meta { font-size: 13px; font-weight: 600; color: #4a9fd4; margin-top: auto; padding-top: 12px; border-top: 1px solid #f0f3f7; }
-  .card.blanes .meta { color: #27ae60; }
-  .card.spare .meta { color: #e67e22; }
-  @media (max-width: 700px) { .card-grid { grid-template-columns: 1fr; } }
+  /* SKIP CHECKBOX */
+  .skip-row { display: flex; align-items: center; gap: 10px; margin-top: 24px; padding-top: 20px; border-top: 1px solid #f0f3f7; }
+  .skip-row input[type="checkbox"] { width: 16px; height: 16px; cursor: pointer; accent-color: #4a9fd4; }
+  .skip-row label { font-size: 13px; color: #8a9ab0; cursor: pointer; }
+
+  /* SECTION BUTTONS */
+  .section-buttons { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 32px; }
+  .section-btn { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; padding: 32px 24px; border-radius: 12px; text-decoration: none; color: white; font-weight: 700; font-size: 16px; transition: transform .2s, box-shadow .2s; text-align: center; }
+  .section-btn:hover { transform: translateY(-4px); box-shadow: 0 10px 28px rgba(0,0,0,0.18); }
+  .section-btn .btn-icon { font-size: 36px; }
+  .section-btn .btn-sub { font-size: 12px; font-weight: 400; opacity: 0.85; margin-top: 4px; }
+  .btn-fpmccann { background: linear-gradient(135deg, #1a2e4a, #2c4a6e); }
+  .btn-blanes   { background: linear-gradient(135deg, #1a5c2e, #27ae60); }
+  @media (max-width: 600px) { .section-buttons { grid-template-columns: 1fr; } }
 
   /* CONTACT SECTION */
-  .contact-section { margin-top: 48px; background: white; border-radius: 12px; padding: 32px 36px; box-shadow: 0 4px 16px rgba(0,0,0,0.07); }
+  .contact-section { background: white; border-radius: 12px; padding: 32px 36px; box-shadow: 0 4px 16px rgba(0,0,0,0.07); }
   .contact-section > h2 { font-size: 16px; font-weight: 700; color: #1a2e4a; margin-bottom: 24px; text-align: center; letter-spacing: 0.5px; }
   .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
   .contact-card { border: 1px solid #e2e8f0; border-radius: 10px; padding: 24px 28px; }
   .contact-card .contact-header { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
-  .contact-card .flag { font-size: 26px; line-height: 1; }
+  .contact-card .flag { font-size: 26px; }
   .contact-card .company { font-size: 14px; font-weight: 700; color: #1a2e4a; }
   .contact-card .name { font-size: 15px; font-weight: 600; color: #2c3e50; margin-bottom: 4px; }
   .contact-card .role { font-size: 12px; color: #8a9ab0; margin-bottom: 14px; }
@@ -63,15 +64,6 @@
 </style>
 </head>
 <body>
-
-<script>
-  // Auth check — redirects to login if session is not authenticated
-  const CORRECT_HASH = "dcac38f3920f7271461be9fd3542b244fd57254e81c95f660edd00713439c60f";
-  if (sessionStorage.getItem("vhfast_auth") !== CORRECT_HASH) {
-    window.location.replace("login.html");
-  }
-</script>
-
 <header>
   <div class="logo">VH FAST</div>
   <h1>Vortex Hydra &mdash; Field After Sales &amp; Technical Support</h1>
@@ -79,61 +71,53 @@
 
 <main>
 
-  <!-- GUIDE SECTION -->
-  <div class="guide-section">
+  <!-- GUIDE SECTION (hidden if user chose "don't show again") -->
+  <div class="guide-section" id="guideSection">
     <h2>&#128196; Come usare questo portale &nbsp;/&nbsp; How to use this portal</h2>
     <div class="guide-lang">
       <div>
         <h3>&#127470;&#127481; Italiano</h3>
-        <p>VH FAST raccoglie tutta la documentazione tecnica e di assistenza per gli impianti Vortex Hydra. Il portale &egrave; diviso in tre sezioni:</p>
+        <p>VH FAST raccoglie tutta la documentazione tecnica e di assistenza per gli impianti Vortex Hydra. Il portale &egrave; diviso in due sezioni ad accesso separato:</p>
         <ul>
-          <li><strong>Procedure Operative Standard (SOP)</strong> &mdash; Istruzioni operative per le linee FP McCann di Cadeby (UK): Linea 1 (TLE Profile) e Linea 3 (Sea Wave 5). Rivolte a tecnici di linea e responsabili di produzione.</li>
-          <li><strong>Manuali Ricambi</strong> &mdash; Specifiche componenti e liste ricambi in formato PDF ed Excel. Utili per acquisti e magazzino.</li>
-          <li><strong>Knowledge Base Tecnica</strong> &mdash; Documentazione approfondita su manutenzione, impostazioni estrusori, tecnologia delle tegole e valutazioni degli impianti, a cura di Miguel Blanes.</li>
+          <li><strong>FP McCann</strong> &mdash; Procedure operative standard (SOP) e manuali ricambi per le linee di Cadeby (UK).</li>
+          <li><strong>Blanes Knowledge Base</strong> &mdash; Documentazione tecnica approfondita su manutenzione, estrusori, tecnologia delle tegole e valutazioni impianti. Ad uso interno Vortex Hydra.</li>
         </ul>
         <p style="margin-top:10px;">I documenti sono <strong>ricercabili per testo completo</strong>. Usa la barra di ricerca all&rsquo;interno di ciascuna sezione per trovare rapidamente quello che ti serve.</p>
       </div>
       <div>
         <h3>&#127468;&#127463; English</h3>
-        <p>VH FAST brings together all technical and after-sales documentation for Vortex Hydra plant installations. The portal is divided into three sections:</p>
+        <p>VH FAST brings together all technical and after-sales documentation for Vortex Hydra plant installations. The portal is divided into two separately accessed sections:</p>
         <ul>
-          <li><strong>Standard Operating Procedures (SOP)</strong> &mdash; Operational instructions for FP McCann&rsquo;s Cadeby (UK) lines: Line 1 (TLE Profile) and Line 3 (Sea Wave 5). For line technicians and production managers.</li>
-          <li><strong>Spare Parts Manuals</strong> &mdash; Component specs and parts lists in PDF and Excel format. For purchasing and warehouse teams.</li>
-          <li><strong>Technical Knowledge Base</strong> &mdash; In-depth documentation on maintenance, extruder settings, tile technology, and plant evaluations, curated by Miguel Blanes.</li>
+          <li><strong>FP McCann</strong> &mdash; Standard Operating Procedures (SOPs) and spare parts manuals for the Cadeby (UK) lines.</li>
+          <li><strong>Blanes Knowledge Base</strong> &mdash; In-depth technical documentation on maintenance, extruders, tile technology and plant evaluations. For Vortex Hydra internal use.</li>
         </ul>
         <p style="margin-top:10px;">All documents are <strong>full-text searchable</strong>. Use the search bar within each section to quickly find what you need.</p>
       </div>
     </div>
+    <div class="skip-row">
+      <input type="checkbox" id="skipIntro" onchange="toggleSkip()">
+      <label for="skipIntro">Non mostrare pi&ugrave; questa pagina introduttiva &nbsp;/&nbsp; Do not show this introduction again</label>
+    </div>
   </div>
 
-  <!-- DOCUMENT CARDS -->
-  <div class="card-grid">
-    <a class="card" href="sops/index.html">
-      <div class="card-icon">&#9881;</div>
-      <h2>Standard Operating Procedures</h2>
-      <p>SOPs for FP McCann (Cadeby, UK) &mdash; Line 1 (TLE Profile) and Line 3 (Sea Wave 5). Full-text searchable.</p>
-      <div class="meta">35 documents &rarr;</div>
+  <!-- SECTION BUTTONS -->
+  <div class="section-buttons">
+    <a class="section-btn btn-fpmccann" href="login-fpmccann.html">
+      <span class="btn-icon">&#127468;&#127463;</span>
+      <span>FP McCann Portal</span>
+      <span class="btn-sub">SOPs &amp; Spare Parts Manuals</span>
     </a>
-    <a class="card spare" href="spareparts/index.html">
-      <div class="card-icon">&#128295;</div>
-      <h2>Spare Parts Manuals</h2>
-      <p>Spare parts manuals and lists for FP McCann (Cadeby, UK) &mdash; Line 1 (TLE) and Line 3 (Sea Wave 5). PDF and Excel.</p>
-      <div class="meta">4 documents &rarr;</div>
-    </a>
-    <a class="card blanes" href="blanes/index.html">
-      <div class="card-icon">&#128218;</div>
-      <h2>Technical Knowledge Base</h2>
-      <p>Maintenance, extruder settings, tile technology, production procedures and plant evaluations. Curated by Miguel Blanes.</p>
-      <div class="meta">67 documents &rarr;</div>
+    <a class="section-btn btn-blanes" href="login-blanes.html">
+      <span class="btn-icon">&#128218;</span>
+      <span>Blanes Knowledge Base</span>
+      <span class="btn-sub">Technical Documentation &mdash; VH Internal</span>
     </a>
   </div>
 
-  <!-- CONTACT SECTION -->
+  <!-- CONTACTS -->
   <div class="contact-section">
     <h2>&#128222; Contact / Contatti</h2>
     <div class="contact-grid">
-
-      <!-- Roberto Berti - Italy -->
       <div class="contact-card">
         <div class="contact-header">
           <span class="flag">&#127470;&#127481;</span>
@@ -141,10 +125,7 @@
         </div>
         <div class="name">Roberto Berti</div>
         <div class="role">Group of Companies After Sales Manager</div>
-        <div class="address">
-          Via Argine Volano, 355<br>
-          44034 Fossalta di Copparo (FE) &mdash; Italy
-        </div>
+        <div class="address">Via Argine Volano, 355<br>44034 Fossalta di Copparo (FE) &mdash; Italy</div>
         <div class="contact-lines">
           <div class="contact-line"><span>Tel:</span> +39 0532 879519</div>
           <div class="contact-line"><span>Cell:</span> +39 348 740 7352</div>
@@ -157,8 +138,6 @@
           <a class="contact-btn btn-phone" href="tel:+390532879519">&#128222; Call</a>
         </div>
       </div>
-
-      <!-- Chris Dale - UK -->
       <div class="contact-card">
         <div class="contact-header">
           <span class="flag">&#127468;&#127463;</span>
@@ -166,10 +145,7 @@
         </div>
         <div class="name">Chris Dale</div>
         <div class="role">&nbsp;</div>
-        <div class="address">
-          Kingmoor Industrial Estate, Kingmoor Road<br>
-          Carlisle CA3 9QJ &mdash; United Kingdom
-        </div>
+        <div class="address">Kingmoor Industrial Estate, Kingmoor Road<br>Carlisle CA3 9QJ &mdash; United Kingdom</div>
         <div class="contact-lines">
           <div class="contact-line"><span>Tel:</span> +44 (0)1228 510800</div>
           <div class="contact-line"><span>DDI:</span> 01228 585762</div>
@@ -180,12 +156,25 @@
           <a class="contact-btn btn-phone" href="tel:+441228510800">&#128222; Call</a>
         </div>
       </div>
-
     </div>
   </div>
 
 </main>
 
 <footer>VH FAST &mdash; Vortex Hydra Field After Sales &amp; Technical Support &nbsp;|&nbsp; &copy; 2025 &nbsp;&nbsp; &#9917; FORZA SPAL &nbsp;|&nbsp; Non camminerai mai sola</footer>
+
+<script>
+  // Show/hide intro based on localStorage preference
+  const SKIP_KEY = "vhfast_skip_intro";
+
+  if (localStorage.getItem(SKIP_KEY) === "1") {
+    document.getElementById("guideSection").style.display = "none";
+  }
+
+  function toggleSkip() {
+    const cb = document.getElementById("skipIntro");
+    localStorage.setItem(SKIP_KEY, cb.checked ? "1" : "0");
+  }
+</script>
 </body>
 </html>

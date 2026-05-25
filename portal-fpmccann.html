@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VH FAST – FP McCann Portal</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', Arial, sans-serif; background: #f4f6f9; color: #2c3e50; min-height: 100vh; display: flex; flex-direction: column; }
+  header { background: linear-gradient(135deg, #1a2e4a 0%, #2c4a6e 100%); color: white; padding: 40px; text-align: center; }
+  header .logo { font-size: 42px; font-weight: 800; letter-spacing: 2px; border: 3px solid #4a9fd4; display: inline-block; padding: 10px 24px; border-radius: 6px; margin-bottom: 16px; }
+  header h1 { font-size: 20px; font-weight: 400; color: #a8c8e8; letter-spacing: 1px; }
+  header .section-badge { display: inline-block; margin-top: 12px; background: rgba(74,159,212,0.25); border: 1px solid #4a9fd4; border-radius: 20px; padding: 4px 16px; font-size: 13px; color: #a8c8e8; }
+  main { flex: 1; max-width: 800px; margin: 50px auto; padding: 0 24px; width: 100%; }
+  .card-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .card { background: white; border-radius: 12px; padding: 32px 28px; box-shadow: 0 4px 16px rgba(0,0,0,0.08); text-decoration: none; color: inherit; border-top: 5px solid #4a9fd4; transition: transform .2s, box-shadow .2s; display: flex; flex-direction: column; gap: 12px; }
+  .card:hover { transform: translateY(-4px); box-shadow: 0 8px 28px rgba(0,0,0,0.13); }
+  .card.spare { border-top-color: #e67e22; }
+  .card-icon { font-size: 38px; }
+  .card h2 { font-size: 18px; font-weight: 700; color: #1a2e4a; }
+  .card p { font-size: 13px; color: #6b7a8d; line-height: 1.6; }
+  .card .meta { font-size: 13px; font-weight: 600; color: #4a9fd4; margin-top: auto; padding-top: 12px; border-top: 1px solid #f0f3f7; }
+  .card.spare .meta { color: #e67e22; }
+  .back-link { display: inline-block; margin-bottom: 28px; font-size: 13px; color: #8a9ab0; text-decoration: none; }
+  .back-link:hover { color: #4a9fd4; }
+  @media (max-width: 600px) { .card-grid { grid-template-columns: 1fr; } }
+  footer { text-align: center; padding: 28px; color: #8a9ab0; font-size: 12px; border-top: 1px solid #e2e8f0; margin-top: 40px; }
+</style>
+</head>
+<body>
+<script>
+  const HASH_FPMCCANN = "1642d803216c944ecf7a6d68d3e50bbf6ed3108e38e6f5f3e17f2605385ab9aa";
+  if (sessionStorage.getItem("vhfast_fpmccann") !== HASH_FPMCCANN) {
+    window.location.replace("login-fpmccann.html");
+  }
+</script>
+<header>
+  <div class="logo">VH FAST</div>
+  <h1>Vortex Hydra &mdash; Field After Sales &amp; Technical Support</h1>
+  <div class="section-badge">&#127468;&#127463; FP McCann &mdash; Cadeby (UK)</div>
+</header>
+<main>
+  <a class="back-link" href="index.html">&larr; Back to portal home</a>
+  <div class="card-grid">
+    <a class="card" href="sops/index.html">
+      <div class="card-icon">&#9881;</div>
+      <h2>Standard Operating Procedures</h2>
+      <p>SOPs for FP McCann (Cadeby, UK) &mdash; Line 1 (TLE Profile) and Line 3 (Sea Wave 5). Full-text searchable.</p>
+      <div class="meta">35 documents &rarr;</div>
+    </a>
+    <a class="card spare" href="spareparts/index.html">
+      <div class="card-icon">&#128295;</div>
+      <h2>Spare Parts Manuals</h2>
+      <p>Spare parts manuals and lists for FP McCann (Cadeby, UK) &mdash; Line 1 (TLE) and Line 3 (Sea Wave 5). PDF and Excel.</p>
+      <div class="meta">4 documents &rarr;</div>
+    </a>
+  </div>
+</main>
+<footer>VH FAST &mdash; Vortex Hydra Field After Sales &amp; Technical Support &nbsp;|&nbsp; &copy; 2025</footer>
+</body>
+</html>
